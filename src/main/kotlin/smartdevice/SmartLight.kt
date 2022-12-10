@@ -2,12 +2,16 @@ package smartdevice
 
 class SmartLight(name: String, category: String): SmartDevice(name = name, category = category) {
 
-    private var brightnessLevel: Int = 0
-        set(value) {
-            if (value in 0..100) {
-                field = value
-            }
-        }
+    override val deviceType = "Smart Light"
+
+    var brightnessLevel by RangeRegulator(initialValue = 2, minValue = 0, maxValue = 100)
+
+//    private var brightnessLevel: Int = 0
+//        private set(value) {
+//            if (value in 0..100) {
+//                field = value
+//            }
+//        }
 
     fun increaseBrightnessLevel() {
         brightnessLevel++
@@ -15,13 +19,13 @@ class SmartLight(name: String, category: String): SmartDevice(name = name, categ
     }
 
     override fun turnOn() {
-        super.status = "on"
+        super.turnOn()
         this.brightnessLevel = 2
-        println("$name turned on. The brightness level is $brightnessLevel.")
+        println("$name is turned on. The brightness level is $brightnessLevel.")
     }
 
     override fun turnOff() {
-        super.status = "off"
+        super.turnOff()
         this.brightnessLevel = 0
         println("Smart Light turned off")
     }

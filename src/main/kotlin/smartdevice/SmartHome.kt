@@ -5,16 +5,21 @@ class SmartHome(
     val smartLight: SmartLight
 ) {
 
+    var deviceTurnOnCount = 0
+        private set
+
     fun turnOnTv() {
+        deviceTurnOnCount++
         smartTv.turnOn()
     }
 
     fun turnOffTv() {
+        deviceTurnOnCount--
         smartTv.turnOff()
     }
 
-    fun increseTvVolumn() {
-        smartTv.increaseSpeakerVolumn()
+    fun increaseTvVolume() {
+        smartTv.increaseSpeakerVolume()
     }
 
     fun changeTvChannelToNext() {
@@ -22,6 +27,7 @@ class SmartHome(
     }
 
     fun turnOnLight() {
+        deviceTurnOnCount++
         smartLight.turnOn()
     }
 
@@ -29,13 +35,13 @@ class SmartHome(
         smartLight.turnOff()
     }
 
-    fun increaseBrightness() {
+    fun increaseLightBrightness() {
         smartLight.increaseBrightnessLevel()
     }
 
     fun turnOffAllDevices() {
-        smartTv.turnOff()
-        smartLight.turnOff()
+        turnOffTv()
+        turnOffLight()
     }
 
 }
